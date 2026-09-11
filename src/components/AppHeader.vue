@@ -18,7 +18,7 @@ function toggleLang() {
   setLang(lang.value === 'ua' ? 'en' : 'ua')
 }
 
-// The header is hidden while the page is at the very top and slides in on scroll.
+// The header is transparent at the very top and gets its white background on scroll.
 const scrolled = ref(false)
 function onScroll() {
   scrolled.value = window.scrollY > 0
@@ -31,7 +31,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 </script>
 
 <template>
-  <header class="header" :class="{ 'header--visible': scrolled }">
+  <header class="header" :class="{ 'header--scrolled': scrolled }">
     <a class="logo" href="#top">
       <img :src="logo.src" :alt="logo.alt" :width="logo.width" height="46" />
     </a>
@@ -54,12 +54,12 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
   width: 1440px;
   height: 195px;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.9);
-  transform: translate(-50%, -100%);
-  transition: transform 0.3s ease;
+  background: transparent;
+  transform: translateX(-50%);
+  transition: background-color 0.3s ease;
 }
-.header--visible {
-  transform: translate(-50%, 0);
+.header--scrolled {
+  background: rgba(255, 255, 255, 0.9);
 }
 .logo {
   position: absolute;

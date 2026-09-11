@@ -47,13 +47,13 @@ describe('App', () => {
     expect(hrefs).toEqual(['#about', '#about', '#contacts'])
   })
 
-  it('hides the header at the top and shows it after scrolling', async () => {
+  it('keeps the header transparent at the top and whitens it after scrolling', async () => {
     const w = mount(App, { attachTo: document.body })
-    expect(w.find('header').classes()).not.toContain('header--visible')
+    expect(w.find('header').classes()).not.toContain('header--scrolled')
     window.scrollY = 300
     window.dispatchEvent(new Event('scroll'))
     await w.vm.$nextTick()
-    expect(w.find('header').classes()).toContain('header--visible')
+    expect(w.find('header').classes()).toContain('header--scrolled')
     w.unmount()
   })
 })
