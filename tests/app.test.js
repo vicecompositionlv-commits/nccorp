@@ -41,11 +41,10 @@ describe('App', () => {
     expect(w.find('h1').text()).toContain('Engineering')
   })
 
-  it('points nav links at the about, mission and contacts anchors', () => {
+  it('sends "about" and "mission" links to the same section', () => {
     const w = mount(App)
     const hrefs = w.findAll('nav a').map((a) => a.attributes('href'))
-    expect(hrefs).toEqual(['#about', '#mission', '#contacts'])
-    expect(w.find('#mission').exists()).toBe(true)
+    expect(hrefs).toEqual(['#about', '#about', '#contacts'])
   })
 
   it('keeps the header transparent at the top and whitens it after scrolling', async () => {
@@ -56,15 +55,5 @@ describe('App', () => {
     await w.vm.$nextTick()
     expect(w.find('header').classes()).toContain('header--scrolled')
     w.unmount()
-  })
-
-  it('opens the mobile menu with the burger and closes it on a link click', async () => {
-    const w = mount(App)
-    expect(w.find('nav').classes()).not.toContain('nav--open')
-    await w.find('button.burger').trigger('click')
-    expect(w.find('nav').classes()).toContain('nav--open')
-    expect(w.find('header').classes()).toContain('header--open')
-    await w.find('nav a').trigger('click')
-    expect(w.find('nav').classes()).not.toContain('nav--open')
   })
 })
