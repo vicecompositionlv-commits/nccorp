@@ -43,6 +43,7 @@ const telHref = computed(() => 'tel:+' + t.value.contacts.phone.replace(/\D/g, '
   position: absolute;
   inset: 0;
   width: 100%;
+  max-width: none;
   height: 100%;
   object-fit: cover;
   object-position: 50% 70%;

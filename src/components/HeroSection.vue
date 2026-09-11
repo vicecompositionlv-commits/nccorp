@@ -10,9 +10,11 @@ const t = inject('t')
   <section id="top" class="hero">
     <img class="hero__photo" :src="photo" alt="" width="1706" height="1280" />
     <div class="inner">
-      <img class="hero__overlay" :src="overlay" alt="" width="1294" height="1069" />
-      <h1 class="hero__title">{{ t.hero.title }}</h1>
-      <p class="hero__text">{{ t.hero.text }}</p>
+      <div class="hero__content">
+        <img class="hero__overlay" :src="overlay" alt="" width="1294" height="1069" />
+        <h1 class="hero__title">{{ t.hero.title }}</h1>
+        <p class="hero__text">{{ t.hero.text }}</p>
+      </div>
     </div>
   </section>
 </template>
@@ -31,19 +33,26 @@ const t = inject('t')
   position: absolute;
   inset: 0;
   width: 100%;
+  max-width: none;
   height: 100%;
   object-fit: cover;
   object-position: 72% 50%; /* keep the sun on the right */
 }
-/* Soft white wash so the dark text stays readable on small screens (replaces the mockup's blurred shape). */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.62) 60%, rgba(255, 255, 255, 0.25) 100%);
+/* The mockup's blurred white shape sits behind the text block and stretches with it. */
+.hero__content {
+  position: relative;
+  z-index: 0; /* own stacking context so the overlay can sit behind the text */
 }
 .hero__overlay {
-  display: none;
+  position: absolute;
+  left: -30%;
+  top: -35%;
+  width: 160%;
+  height: 165%;
+  max-width: none;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: -1;
 }
 .inner {
   padding-top: calc(var(--header-h) + 24px);
@@ -74,8 +83,8 @@ const t = inject('t')
     min-height: 0;
     height: max(900px, 100vh);
   }
-  .hero::before {
-    display: none;
+  .hero__content {
+    position: static;
   }
   /* At 1440 the photo is shown at its natural 1706px width, cropped exactly like the mockup;
      on wider screens it scales up to fill the viewport. */
@@ -88,12 +97,11 @@ const t = inject('t')
     object-position: 50% 28.7%;
   }
   .hero__overlay {
-    display: block;
-    position: absolute;
     left: -206px;
     top: 74px;
-    max-width: none;
-    pointer-events: none;
+    width: 1294px;
+    height: 1069px;
+    z-index: auto; /* .hero__content is static here; DOM order keeps it under the text */
   }
   .inner {
     padding: 0;
