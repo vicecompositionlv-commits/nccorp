@@ -18,9 +18,10 @@ const t = inject('t')
 </template>
 
 <style scoped>
+/* Fills the viewport; never shorter than the 900px mockup frame. */
 .hero {
   position: relative;
-  height: 900px;
+  height: max(900px, 100vh);
   overflow: hidden;
 }
 /* At 1440 the photo is shown at its natural 1706px width, cropped exactly like the mockup;
