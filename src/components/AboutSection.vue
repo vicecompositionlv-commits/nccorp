@@ -74,16 +74,14 @@ const captionX = [731, 945, 1193]
 .about__title {
   left: 62px;
   top: 160px;
-  width: 293px;
 }
 .mission__title {
   left: 729px;
   top: 160px;
-  width: 544px;
 }
 h2 {
   font: 700 50px/54px var(--f-head);
-  white-space: pre-line;
+  white-space: pre;
 }
 .about__text {
   left: 62px;

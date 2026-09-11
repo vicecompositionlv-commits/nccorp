@@ -38,9 +38,8 @@ const t = inject('t')
   position: absolute;
   left: 62px;
   top: 245px;
-  width: 727px;
   font: 700 116px/118px var(--f-head);
-  white-space: pre-line;
+  white-space: pre;
 }
 .hero__text {
   position: absolute;
