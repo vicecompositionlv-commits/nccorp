@@ -24,7 +24,6 @@ const captionX = [731, 945, 1193]
     <span class="about__divider"></span>
     <p class="about__caption">{{ t.about.caption }}</p>
 
-    <div id="mission" class="mission-anchor"></div>
     <span class="label mission__label">{{ t.mission.label }}</span>
     <h2 class="mission__title">{{ t.mission.title }}</h2>
     <p class="mission__text">{{ t.mission.text }}</p>
@@ -116,11 +115,5 @@ h2 {
   font: 400 15px/23px var(--f-body);
   text-transform: uppercase;
   white-space: pre-line;
-}
-.mission-anchor {
-  left: 0;
-  top: 0;
-  width: 0;
-  height: 0;
 }
 </style>

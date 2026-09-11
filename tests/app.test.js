@@ -7,26 +7,31 @@ beforeEach(() => {
   window.history.replaceState({}, '', '/')
 })
 
-async function switchLang(w) {
-  await w.find('button.lang').trigger('click')
-  await w.find('.lang-menu button').trigger('click')
-}
-
 describe('App', () => {
   it('renders Ukrainian by default', () => {
     const w = mount(App)
     expect(w.find('h1').text()).toContain('Технології')
     expect(w.find('nav').text()).toContain('Про нас')
+    expect(w.find('.logo img').attributes('src')).toContain('logo-ua')
     expect(document.documentElement.lang).toBe('uk')
   })
 
-  it('switches to English and persists it', async () => {
+  it('toggles to English on a single click and persists it', async () => {
     const w = mount(App)
-    await switchLang(w)
+    await w.find('button.lang').trigger('click')
     expect(w.find('h1').text()).toContain('Engineering')
     expect(w.find('nav').text()).toContain('About us')
+    expect(w.find('.logo img').attributes('src')).toContain('logo-en')
     expect(localStorage.getItem('ensi-lang')).toBe('en')
     expect(document.documentElement.lang).toBe('en')
+  })
+
+  it('toggles back to Ukrainian on the next click', async () => {
+    const w = mount(App)
+    await w.find('button.lang').trigger('click')
+    await w.find('button.lang').trigger('click')
+    expect(w.find('h1').text()).toContain('Технології')
+    expect(localStorage.getItem('ensi-lang')).toBe('ua')
   })
 
   it('honours ?lang=en over stored value', () => {
@@ -34,5 +39,21 @@ describe('App', () => {
     window.history.replaceState({}, '', '/?lang=en')
     const w = mount(App)
     expect(w.find('h1').text()).toContain('Engineering')
+  })
+
+  it('sends "about" and "mission" links to the same section', () => {
+    const w = mount(App)
+    const hrefs = w.findAll('nav a').map((a) => a.attributes('href'))
+    expect(hrefs).toEqual(['#about', '#about', '#contacts'])
+  })
+
+  it('hides the header at the top and shows it after scrolling', async () => {
+    const w = mount(App, { attachTo: document.body })
+    expect(w.find('header').classes()).not.toContain('header--visible')
+    window.scrollY = 300
+    window.dispatchEvent(new Event('scroll'))
+    await w.vm.$nextTick()
+    expect(w.find('header').classes()).toContain('header--visible')
+    w.unmount()
   })
 })
