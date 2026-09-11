@@ -47,7 +47,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
       </button>
       <nav class="nav" :class="{ 'nav--open': open }">
         <a href="#about" @click="close">{{ t.nav.about }}</a>
-        <a href="#about" @click="close">{{ t.nav.mission }}</a>
+        <a href="#mission" @click="close">{{ t.nav.mission }}</a>
         <a href="#contacts" @click="close">{{ t.nav.contacts }}</a>
         <button class="lang" type="button" @click="toggleLang">
           {{ t.langLabel }} <img :src="chevron" alt="" width="11" height="7" />

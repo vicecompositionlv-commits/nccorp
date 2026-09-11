@@ -41,10 +41,11 @@ describe('App', () => {
     expect(w.find('h1').text()).toContain('Engineering')
   })
 
-  it('sends "about" and "mission" links to the same section', () => {
+  it('points nav links at the about, mission and contacts anchors', () => {
     const w = mount(App)
     const hrefs = w.findAll('nav a').map((a) => a.attributes('href'))
-    expect(hrefs).toEqual(['#about', '#about', '#contacts'])
+    expect(hrefs).toEqual(['#about', '#mission', '#contacts'])
+    expect(w.find('#mission').exists()).toBe(true)
   })
 
   it('keeps the header transparent at the top and whitens it after scrolling', async () => {

@@ -27,7 +27,7 @@ const features = [
         <p class="about__caption">{{ t.about.caption }}</p>
       </div>
 
-      <div class="col">
+      <div id="mission" class="col">
         <span class="label mission__label">{{ t.mission.label }}</span>
         <h2 class="mission__title">{{ t.mission.title }}</h2>
         <p class="mission__text">{{ t.mission.text }}</p>
@@ -65,6 +65,10 @@ const features = [
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+/* The mission column is its own anchor on phone/tablet; on desktop it coincides with the section top. */
+#mission {
+  scroll-margin-top: calc(var(--header-h) + 24px);
 }
 h2 {
   margin-top: 20px;
@@ -152,8 +156,16 @@ h2 {
     top: 50%;
     transform: translateY(-50%);
   }
-  /* Wrappers vanish so every leaf positions against .inner. */
-  .col,
+  /* Columns cover the whole frame so their absolute children keep .inner coordinates; feature wrappers vanish. */
+  .col {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+  /* Header + the vertical centring offset of the 705px frame, so #mission lands exactly where #about does. */
+  #mission {
+    scroll-margin-top: calc(195px + max(0px, (100vh - 900px) / 2));
+  }
   .features,
   .feature {
     display: contents;
