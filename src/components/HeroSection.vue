@@ -48,5 +48,6 @@ const t = inject('t')
   width: 644px;
   font: 500 20px/34px var(--f-body);
   color: #000;
+  white-space: pre-line;
 }
 </style>
