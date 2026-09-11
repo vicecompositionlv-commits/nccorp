@@ -12,13 +12,15 @@ const telHref = computed(() => 'tel:+' + t.value.contacts.phone.replace(/\D/g, '
 <template>
   <section id="contacts" class="contacts">
     <img class="contacts__photo" :src="photo" alt="" width="2475" height="1237" />
-    <img class="contacts__mark" :src="mark" alt="" width="859" height="543" />
-    <span class="label contacts__label">{{ t.contacts.label }}</span>
-    <p class="contacts__company">{{ t.contacts.company }}</p>
-    <img class="contacts__icon contacts__icon--phone" :src="iconPhone" alt="" width="23" height="25" />
-    <a class="contacts__line contacts__line--phone" :href="telHref">{{ t.contacts.phone }}</a>
-    <img class="contacts__icon contacts__icon--mail" :src="iconMail" alt="" width="23" height="24" />
-    <a class="contacts__line contacts__line--mail" :href="'mailto:' + t.contacts.email">{{ t.contacts.email }}</a>
+    <div class="inner">
+      <img class="contacts__mark" :src="mark" alt="" width="859" height="543" />
+      <span class="label contacts__label">{{ t.contacts.label }}</span>
+      <p class="contacts__company">{{ t.contacts.company }}</p>
+      <img class="contacts__icon contacts__icon--phone" :src="iconPhone" alt="" width="23" height="25" />
+      <a class="contacts__line contacts__line--phone" :href="telHref">{{ t.contacts.phone }}</a>
+      <img class="contacts__icon contacts__icon--mail" :src="iconMail" alt="" width="23" height="24" />
+      <a class="contacts__line contacts__line--mail" :href="'mailto:' + t.contacts.email">{{ t.contacts.email }}</a>
+    </div>
   </section>
 </template>
 
@@ -29,12 +31,18 @@ const telHref = computed(() => 'tel:+' + t.value.contacts.phone.replace(/\D/g, '
   overflow: hidden;
   color: #fff;
 }
-.contacts > * {
-  position: absolute;
-}
+/* Mockup crop: photo 2475px wide shifted 185px left, 13px up. Wider screens scale it to fill. */
 .contacts__photo {
+  position: absolute;
   left: -185px;
-  top: -13px;
+  top: 0;
+  width: max(calc(100% + 185px), 2475px);
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 2.4%;
+}
+.inner > * {
+  position: absolute;
 }
 .contacts__mark {
   left: 501px;

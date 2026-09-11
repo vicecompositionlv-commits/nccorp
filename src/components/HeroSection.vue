@@ -9,9 +9,11 @@ const t = inject('t')
 <template>
   <section id="top" class="hero">
     <img class="hero__photo" :src="photo" alt="" width="1706" height="1280" />
-    <img class="hero__overlay" :src="overlay" alt="" width="1294" height="1069" />
-    <h1 class="hero__title">{{ t.hero.title }}</h1>
-    <p class="hero__text">{{ t.hero.text }}</p>
+    <div class="inner">
+      <img class="hero__overlay" :src="overlay" alt="" width="1294" height="1069" />
+      <h1 class="hero__title">{{ t.hero.title }}</h1>
+      <p class="hero__text">{{ t.hero.text }}</p>
+    </div>
   </section>
 </template>
 
@@ -21,11 +23,16 @@ const t = inject('t')
   height: 900px;
   overflow: hidden;
 }
+/* At 1440 the photo is shown at its natural 1706px width, cropped exactly like the mockup;
+   on wider screens it scales up to fill the viewport. */
 .hero__photo {
   position: absolute;
-  left: -16px;
-  top: -109px;
-  display: block;
+  left: 0;
+  top: 0;
+  width: max(100%, 1706px);
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28.7%;
 }
 .hero__overlay {
   position: absolute;

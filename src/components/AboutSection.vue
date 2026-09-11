@@ -16,6 +16,7 @@ const captionX = [731, 945, 1193]
 
 <template>
   <section id="about" class="about">
+    <div class="inner">
     <img class="about__mark" :src="mark" alt="" width="355" height="219" />
 
     <span class="label about__label">{{ t.about.label }}</span>
@@ -46,6 +47,7 @@ const captionX = [731, 945, 1193]
     >
       {{ f }}
     </p>
+    </div>
   </section>
 </template>
 
@@ -55,7 +57,7 @@ const captionX = [731, 945, 1193]
   height: 705px;
   background: #fff;
 }
-.about > * {
+.inner > * {
   position: absolute;
 }
 .about__mark {

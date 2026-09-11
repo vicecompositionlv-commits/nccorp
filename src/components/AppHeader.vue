@@ -32,6 +32,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 
 <template>
   <header class="header" :class="{ 'header--scrolled': scrolled }">
+    <div class="inner">
     <a class="logo" href="#top">
       <img :src="logo.src" :alt="logo.alt" :width="logo.width" height="46" />
     </a>
@@ -43,6 +44,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
         {{ t.langLabel }} <img :src="chevron" alt="" width="11" height="7" />
       </button>
     </nav>
+    </div>
   </header>
 </template>
 
@@ -50,12 +52,11 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 .header {
   position: fixed;
   top: 0;
-  left: 50%;
-  width: 1440px;
+  left: 0;
+  right: 0;
   height: 195px;
   z-index: 10;
   background: transparent;
-  transform: translateX(-50%);
   transition: background-color 0.3s ease;
 }
 .header--scrolled {
