@@ -52,10 +52,17 @@ const captionX = [731, 945, 1193]
 </template>
 
 <style scoped>
+/* Header (195px) + this section fill the viewport; never shorter than the 705px mockup frame. */
 .about {
   position: relative;
-  height: 705px;
+  height: max(705px, calc(100vh - 195px));
   background: #fff;
+}
+/* Keep the 705px mockup frame vertically centred when the section is taller. */
+.inner {
+  height: 705px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .inner > * {
   position: absolute;

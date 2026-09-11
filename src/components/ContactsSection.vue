@@ -25,9 +25,10 @@ const telHref = computed(() => 'tel:+' + t.value.contacts.phone.replace(/\D/g, '
 </template>
 
 <style scoped>
+/* Header (195px) + this section fill the viewport; never shorter than the 705px mockup frame. */
 .contacts {
   position: relative;
-  height: 705px;
+  height: max(705px, calc(100vh - 195px));
   overflow: hidden;
   color: #fff;
 }
@@ -40,6 +41,12 @@ const telHref = computed(() => 'tel:+' + t.value.contacts.phone.replace(/\D/g, '
   height: 100%;
   object-fit: cover;
   object-position: 50% 2.4%;
+}
+/* Keep the 705px mockup frame vertically centred when the section is taller. */
+.inner {
+  height: 705px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .inner > * {
   position: absolute;
