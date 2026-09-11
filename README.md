@@ -31,7 +31,7 @@ git push -u origin main
 ## Структура
 
 ```
-index.html                 підключення шрифтів (Onest, Inter)
+index.html                 підключення шрифтів (Geologica, Inter)
 src/i18n.js                усі тексти обома мовами
 src/App.vue                стан мови, композиція секцій
 src/components/            AppHeader, HeroSection, AboutSection, ContactsSection
