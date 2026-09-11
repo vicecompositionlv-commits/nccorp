@@ -56,4 +56,14 @@ describe('App', () => {
     expect(w.find('header').classes()).toContain('header--scrolled')
     w.unmount()
   })
+
+  it('opens the mobile menu with the burger and closes it on a link click', async () => {
+    const w = mount(App)
+    expect(w.find('nav').classes()).not.toContain('nav--open')
+    await w.find('button.burger').trigger('click')
+    expect(w.find('nav').classes()).toContain('nav--open')
+    expect(w.find('header').classes()).toContain('header--open')
+    await w.find('nav a').trigger('click')
+    expect(w.find('nav').classes()).not.toContain('nav--open')
+  })
 })
