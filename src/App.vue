@@ -2,6 +2,9 @@
 import { ref, computed, provide, watchEffect } from 'vue'
 import { messages, LANGS, loadLang, saveLang } from './i18n.js'
 import AppHeader from './components/AppHeader.vue'
+import HeroSection from './components/HeroSection.vue'
+import AboutSection from './components/AboutSection.vue'
+import ContactsSection from './components/ContactsSection.vue'
 
 function initialLang() {
   const q = new URLSearchParams(window.location.search).get('lang')
@@ -27,7 +30,9 @@ provide('setLang', setLang)
   <div class="canvas">
     <AppHeader />
     <main>
-      <h1 style="white-space: pre-line; padding-top: 240px">{{ t.hero.title }}</h1>
+      <HeroSection />
+      <AboutSection />
+      <ContactsSection />
     </main>
   </div>
 </template>
