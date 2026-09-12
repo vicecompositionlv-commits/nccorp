@@ -59,7 +59,7 @@ const t = inject('t')
   z-index: -1;
 }
 .hero__title {
-  font: 700 min(57px, 14vw) / 1 var(--f-head);
+  font: 700 min(57px, 13vw) / 1 var(--f-head);
   white-space: pre-line;
 }
 .hero__text {
