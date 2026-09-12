@@ -70,6 +70,12 @@
 поточний словник через `provide/inject`. Вибір мови зберігається в `localStorage` під ключем
 `ensi-lang`, за замовчуванням `ua`.
 
+## SEO
+
+При збірці сторінки пререндеряться через vue/server-renderer: `/` українська, `/en/` англійська; клієнт гідрує
+розмітку. У head: title/description обома мовами, canonical, hreflang uk/en/x-default, Open Graph з og.jpg 1200×630,
+JSON-LD Organization, favicon.svg. Плагін у vite.config.js генерує robots.txt і sitemap.xml. Абсолютна адреса — `VITE_SITE_URL`.
+
 ## Обробка помилок
 
 Сайт статичний, зовнішніх запитів окрім Google Fonts немає. Якщо шрифти не завантажились,

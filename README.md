@@ -28,12 +28,25 @@ git push -u origin main
 
 Кожен наступний `git push` у гілку `main` автоматично збирає і публікує нову версію.
 
+## Свій домен і SEO
+
+Абсолютна адреса сайту для canonical, Open Graph, robots.txt і sitemap.xml береться зі змінної `VITE_SITE_URL`.
+У workflow вона виставляється автоматично як `https://<логін>.github.io/<репозиторій>/`. Коли з'явиться свій домен,
+заміни цей рядок у `.github/workflows/deploy.yml` на `https://домен/` і додай домен у Settings → Pages.
+
+При збірці сторінки пререндеряться: `/` — українська, `/en/` — англійська, з готовим текстом у HTML для Google.
+Картинка для шерингу — `public/og.jpg`, іконка сайту — `public/favicon.svg`.
+Після публікації додай сайт у Google Search Console і вкажи там `sitemap.xml`.
+
 ## Структура
 
 ```
 index.html                 підключення шрифтів (Geologica, Inter)
 src/i18n.js                усі тексти обома мовами
 src/App.vue                стан мови, композиція секцій
+src/entry-server.js        рендер сторінки для пререндеру
+scripts/prerender.mjs      генерує dist/index.html і dist/en/index.html після збірки
+public/                    favicon.svg, og.jpg
 src/components/            AppHeader, HeroSection, AboutSection, ContactsSection
 src/assets/                фото, логотип, іконки з макета
 .github/workflows/         автодеплой на GitHub Pages

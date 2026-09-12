@@ -4,6 +4,10 @@ const KEY = 'ensi-lang'
 export const messages = {
   ua: {
     langLabel: 'UA',
+    meta: {
+      title: 'Корпорація ЕНСІ — автоматизовані рішення для бізнесу',
+      description: 'Технологічна та інженерна компанія: розробляємо і впроваджуємо сучасні автоматизовані рішення, щоб бізнес працював ефективніше, безпечніше та стабільніше.',
+    },
     nav: { about: 'Про нас', mission: 'Наша місія', contacts: 'Контакти' },
     hero: {
       title: 'Технології\nдля кращого\nзавтра',
@@ -30,6 +34,10 @@ export const messages = {
   },
   en: {
     langLabel: 'ENG',
+    meta: {
+      title: 'NC Corporation — automated solutions for business',
+      description: 'Technology and engineering company developing and implementing modern automated solutions that help businesses operate more efficiently, safely and sustainably.',
+    },
     nav: { about: 'About us', mission: 'Our mission', contacts: 'Contacts' },
     hero: {
       title: 'Engineering\na brighter\ntomorrow',

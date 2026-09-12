@@ -1,5 +1,6 @@
-import { createApp } from 'vue'
+import { createSSRApp } from 'vue'
 import './styles/global.css'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+// createSSRApp hydrates the prerendered markup in production and mounts normally in dev (empty #app).
+createSSRApp(App).mount('#app')
