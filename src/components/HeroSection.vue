@@ -18,44 +18,116 @@ const t = inject('t')
 </template>
 
 <style scoped>
-/* Fills the viewport; never shorter than the 900px mockup frame. */
+/* ---------- phone (Figma 390x844) ---------- */
 .hero {
   position: relative;
-  height: max(900px, 100vh);
+  min-height: 844px;
+  min-height: max(844px, 100svh);
   overflow: hidden;
 }
-/* At 1440 the photo is shown at its natural 1706px width, cropped exactly like the mockup;
-   on wider screens it scales up to fill the viewport. */
+/* The same 1706x1280 photo as in Figma, at natural size, offset exactly like the frame
+   (x -727 for a 390 frame => centre - 922). If the section grows taller it zooms from the top. */
 .hero__photo {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: max(100%, 1706px);
-  height: 100%;
+  top: -109px;
+  left: 50%;
+  margin-left: -922px;
+  width: 1706px;
+  height: calc(100% + 109px);
   object-fit: cover;
-  object-position: 50% 28.7%;
+  object-position: 50% 0;
 }
+/* Blurred white shape (export includes blur padding, so it is placed/scaled relative to the visible shape). */
 .hero__overlay {
   position: absolute;
-  left: -206px;
-  top: 74px;
-  display: block;
+  left: -91px;
+  top: 185px;
+  width: 548px;
+  height: 452px;
   pointer-events: none;
 }
+.hero__title,
+.hero__text {
+  position: relative;
+  z-index: 1;
+}
 .hero__title {
-  position: absolute;
-  left: 62px;
-  top: 245px;
-  font: 700 116px/118px var(--f-head);
-  white-space: pre;
+  padding-top: 259px;
+  font: 700 min(57px, 14.6vw) / 1 var(--f-head);
+  white-space: pre-line;
 }
 .hero__text {
-  position: absolute;
-  left: 62px;
-  top: 626px;
-  width: 644px;
-  font: 500 20px/34px var(--f-body);
+  margin-top: 26px;
+  max-width: 317px;
+  padding-bottom: 48px;
+  font: 500 15px/24px var(--f-body);
   color: #000;
-  white-space: pre-line;
+}
+
+/* ---------- tablet (Figma 768x1024) ---------- */
+@media (min-width: 768px) {
+  .hero {
+    min-height: 1024px;
+    min-height: max(1024px, 100vh);
+  }
+  .hero__photo {
+    margin-left: -777px;
+  }
+  .hero__overlay {
+    left: -141px;
+    top: 88px;
+    width: 907px;
+    height: 749px;
+  }
+  .hero__title {
+    padding-top: 269px;
+    font: 700 100px/101px var(--f-head);
+  }
+  .hero__text {
+    margin-top: 32px;
+    max-width: 600px;
+    font: 500 20px/34px var(--f-body);
+  }
+}
+
+/* ---------- desktop (Figma 1440x900): exact coordinates ---------- */
+@media (min-width: 1440px) {
+  .hero {
+    min-height: 0;
+    height: max(900px, 100vh);
+  }
+  .hero__photo {
+    left: 0;
+    top: 0;
+    margin-left: 0;
+    width: max(100%, 1706px);
+    height: 100%;
+    object-position: 50% 28.7%;
+  }
+  .hero__overlay {
+    left: -206px;
+    top: 74px;
+    width: 1294px;
+    height: 1069px;
+  }
+  .hero__title {
+    position: absolute;
+    left: 62px;
+    top: 245px;
+    padding: 0;
+    font: 700 116px/118px var(--f-head);
+    white-space: pre;
+  }
+  .hero__text {
+    position: absolute;
+    left: 62px;
+    top: 626px;
+    width: 644px;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font: 500 20px/34px var(--f-body);
+    white-space: pre-line;
+  }
 }
 </style>

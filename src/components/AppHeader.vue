@@ -33,28 +33,29 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 <template>
   <header class="header" :class="{ 'header--scrolled': scrolled }">
     <div class="inner">
-    <a class="logo" href="#top">
-      <img :src="logo.src" :alt="logo.alt" :width="logo.width" height="46" />
-    </a>
-    <nav class="nav">
-      <a href="#about">{{ t.nav.about }}</a>
-      <a href="#about">{{ t.nav.mission }}</a>
-      <a href="#contacts">{{ t.nav.contacts }}</a>
-      <button class="lang" type="button" @click="toggleLang">
-        {{ t.langLabel }} <img :src="chevron" alt="" width="11" height="7" />
-      </button>
-    </nav>
+      <a class="logo" href="#top">
+        <img :src="logo.src" :alt="logo.alt" :width="logo.width" height="46" />
+      </a>
+      <nav class="nav">
+        <a class="nav__about" href="#about">{{ t.nav.about }}</a>
+        <a class="nav__mission" href="#about">{{ t.nav.mission }}</a>
+        <a class="nav__contacts" href="#contacts">{{ t.nav.contacts }}</a>
+        <button class="lang" type="button" @click="toggleLang">
+          {{ t.langLabel }} <img :src="chevron" alt="" width="11" height="7" />
+        </button>
+      </nav>
     </div>
   </header>
 </template>
 
 <style scoped>
+/* ---------- phone (Figma 390): logo + language only ---------- */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 195px;
+  height: var(--header-h);
   z-index: 10;
   background: transparent;
   transition: background-color 0.3s ease;
@@ -62,29 +63,72 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 .header--scrolled {
   background: rgba(255, 255, 255, 0.9);
 }
+.inner {
+  height: 100%;
+}
 .logo {
   position: absolute;
-  left: 64px;
-  top: 74px;
+  left: var(--pad-x);
+  top: 31px;
   display: block;
   line-height: 0;
 }
+.logo img {
+  width: auto;
+  height: 33px;
+}
 .nav {
   position: absolute;
-  right: 64px;
-  top: 82px;
+  right: var(--pad-x);
+  top: 34px;
   display: flex;
   align-items: flex-start;
-  gap: 68px;
+  gap: 20px;
   font: 400 15px/27px var(--f-body);
   text-transform: uppercase;
+}
+.nav a {
+  display: none;
 }
 .lang {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  margin-left: 7px;
   line-height: 27px;
   text-transform: uppercase;
+}
+
+/* ---------- tablet (Figma 768): about + contacts + language ---------- */
+@media (min-width: 768px) {
+  .logo {
+    top: 74px;
+  }
+  .logo img {
+    height: 46px;
+  }
+  .nav {
+    top: 82px;
+  }
+  .nav .nav__about,
+  .nav .nav__contacts {
+    display: block;
+  }
+}
+
+/* ---------- desktop (Figma 1440): full menu ---------- */
+@media (min-width: 1440px) {
+  .logo {
+    left: 64px;
+  }
+  .nav {
+    right: 64px;
+    gap: 68px;
+  }
+  .nav .nav__mission {
+    display: block;
+  }
+  .lang {
+    margin-left: 7px;
+  }
 }
 </style>
