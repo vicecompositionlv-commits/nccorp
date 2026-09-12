@@ -47,6 +47,16 @@ describe('App', () => {
     expect(hrefs).toEqual(['#about', '#about', '#contacts'])
   })
 
+  it('scrolls to sections without changing the address bar', async () => {
+    const w = mount(App, { attachTo: document.body })
+    window.scrollTo = () => {}
+    await w.find('nav a.nav__contacts').trigger('click')
+    expect(window.location.hash).toBe('')
+    await w.find('a.logo').trigger('click')
+    expect(window.location.hash).toBe('')
+    w.unmount()
+  })
+
   it('keeps the header transparent at the top and whitens it after scrolling', async () => {
     const w = mount(App, { attachTo: document.body })
     expect(w.find('header').classes()).not.toContain('header--scrolled')

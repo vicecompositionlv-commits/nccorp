@@ -14,6 +14,16 @@ const logo = computed(() =>
     : { src: logoEn, width: 311, alt: 'NC Corporation' },
 )
 
+// Scroll to a section without putting #anchors into the address bar (scroll-margin-top keeps it under the header).
+function go(event, id) {
+  event.preventDefault()
+  if (id === 'top') {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    return
+  }
+  document.getElementById(id)?.scrollIntoView?.({ behavior: 'smooth', block: 'start' })
+}
+
 function toggleLang() {
   setLang(lang.value === 'ua' ? 'en' : 'ua')
 }
@@ -33,13 +43,13 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 <template>
   <header class="header" :class="{ 'header--scrolled': scrolled }">
     <div class="inner">
-      <a class="logo" href="#top">
+      <a class="logo" href="#top" @click="go($event, 'top')">
         <img :src="logo.src" :alt="logo.alt" :width="logo.width" height="46" />
       </a>
       <nav class="nav">
-        <a class="nav__about" href="#about">{{ t.nav.about }}</a>
-        <a class="nav__mission" href="#about">{{ t.nav.mission }}</a>
-        <a class="nav__contacts" href="#contacts">{{ t.nav.contacts }}</a>
+        <a class="nav__about" href="#about" @click="go($event, 'about')">{{ t.nav.about }}</a>
+        <a class="nav__mission" href="#about" @click="go($event, 'about')">{{ t.nav.mission }}</a>
+        <a class="nav__contacts" href="#contacts" @click="go($event, 'contacts')">{{ t.nav.contacts }}</a>
         <button class="lang" type="button" @click="toggleLang">
           {{ t.langLabel }} <img :src="chevron" alt="" width="11" height="7" />
         </button>
