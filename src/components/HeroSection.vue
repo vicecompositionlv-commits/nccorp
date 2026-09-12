@@ -10,9 +10,11 @@ const t = inject('t')
   <section id="top" class="hero">
     <img class="hero__photo" :src="photo" alt="" width="1706" height="1280" />
     <div class="inner">
-      <img class="hero__overlay" :src="overlay" alt="" width="1294" height="1069" />
-      <h1 class="hero__title">{{ t.hero.title }}</h1>
-      <p class="hero__text">{{ t.hero.text }}</p>
+      <div class="hero__content">
+        <img class="hero__overlay" :src="overlay" alt="" width="1294" height="1069" />
+        <h1 class="hero__title">{{ t.hero.title }}</h1>
+        <p class="hero__text">{{ t.hero.text }}</p>
+      </div>
     </div>
   </section>
 </template>
@@ -37,23 +39,27 @@ const t = inject('t')
   object-fit: cover;
   object-position: 50% 0;
 }
-/* Blurred white shape (export includes blur padding, so it is placed/scaled relative to the visible shape). */
+.inner {
+  padding-top: 259px;
+}
+/* The blurred white shape is sized from the text block so it always covers the title and paragraph,
+   whatever the phone width. Own stacking context keeps it behind the text. */
+.hero__content {
+  position: relative;
+  z-index: 0;
+}
 .hero__overlay {
   position: absolute;
-  left: -91px;
-  top: 185px;
-  width: 548px;
-  height: 452px;
+  left: -25%;
+  top: -30%;
+  width: 150%;
+  height: 160%;
+  object-fit: fill;
   pointer-events: none;
-}
-.hero__title,
-.hero__text {
-  position: relative;
-  z-index: 1;
+  z-index: -1;
 }
 .hero__title {
-  padding-top: 259px;
-  font: 700 min(57px, 14.6vw) / 1 var(--f-head);
+  font: 700 min(57px, 14vw) / 1 var(--f-head);
   white-space: pre-line;
 }
 .hero__text {
@@ -73,14 +79,10 @@ const t = inject('t')
   .hero__photo {
     margin-left: -777px;
   }
-  .hero__overlay {
-    left: -141px;
-    top: 88px;
-    width: 907px;
-    height: 749px;
+  .inner {
+    padding-top: 269px;
   }
   .hero__title {
-    padding-top: 269px;
     font: 700 100px/101px var(--f-head);
   }
   .hero__text {
@@ -104,17 +106,23 @@ const t = inject('t')
     height: 100%;
     object-position: 50% 28.7%;
   }
+  .inner {
+    padding: 0;
+  }
+  .hero__content {
+    position: static;
+  }
   .hero__overlay {
     left: -206px;
     top: 74px;
     width: 1294px;
     height: 1069px;
+    z-index: auto;
   }
   .hero__title {
     position: absolute;
     left: 62px;
     top: 245px;
-    padding: 0;
     font: 700 116px/118px var(--f-head);
     white-space: pre;
   }
