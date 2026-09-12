@@ -31,8 +31,12 @@ git push -u origin main
 ## Свій домен і SEO
 
 Абсолютна адреса сайту для canonical, Open Graph, robots.txt і sitemap.xml береться зі змінної `VITE_SITE_URL`.
-У workflow вона виставляється автоматично як `https://<логін>.github.io/<репозиторій>/`. Коли з'явиться свій домен,
-заміни цей рядок у `.github/workflows/deploy.yml` на `https://домен/` і додай домен у Settings → Pages.
+У workflow вона задана як `https://corpnc.com/` (домен сайту). Шлях з цієї адреси стає базовим шляхом збірки,
+тому для github.io-адреси з підпапкою треба було б вказати повну адресу з назвою репозиторію.
+
+DNS для домену (панель реєстратора): чотири A-записи `@` → 185.199.108.153, 185.199.109.153, 185.199.110.153,
+185.199.111.153 і CNAME `www` → `vicecompositionlv-commits.github.io`. У GitHub: Settings → Pages → Custom domain → `corpnc.com`,
+після перевірки увімкнути Enforce HTTPS.
 
 При збірці сторінки пререндеряться: `/` — українська, `/en/` — англійська, з готовим текстом у HTML для Google.
 Картинка для шерингу — `public/og.jpg`, іконка сайту — `public/favicon.svg`.

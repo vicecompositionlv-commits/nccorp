@@ -2,6 +2,9 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 function pagesBase() {
+  // With a custom domain the site lives at the root; VITE_SITE_URL's path decides.
+  const site = process.env.VITE_SITE_URL
+  if (site && /^https?:\/\//.test(site)) return new URL(site).pathname.replace(/\/?$/, '/')
   const repo = process.env.GITHUB_REPOSITORY // "owner/name" in GitHub Actions
   if (!repo) return '/'
   const name = repo.split('/')[1]
