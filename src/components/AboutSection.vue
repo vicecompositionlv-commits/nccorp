@@ -177,11 +177,11 @@ h2 {
   }
 }
 
-/* ---------- desktop (Figma 1440): exact coordinates ---------- */
-@media (min-width: 1440px) {
+/* ---------- desktop (Figma 1440, scaled down between 1024 and 1439px): exact coordinates ---------- */
+@media (min-width: 1024px) {
   /* Header (195px) + this section fill the viewport; never shorter than the 705px mockup frame. */
   .about {
-    height: max(705px, calc(100vh - 195px));
+    height: max(705px, calc(var(--vh) - 195px));
     padding: 0;
   }
   /* Keep the 705px mockup frame vertically centred when the section is taller. */

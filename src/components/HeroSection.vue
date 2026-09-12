@@ -92,11 +92,11 @@ const t = inject('t')
   }
 }
 
-/* ---------- desktop (Figma 1440x900): exact coordinates ---------- */
-@media (min-width: 1440px) {
+/* ---------- desktop (Figma 1440x900, scaled down between 1024 and 1439px): exact coordinates ---------- */
+@media (min-width: 1024px) {
   .hero {
     min-height: 0;
-    height: max(900px, 100vh);
+    height: max(900px, var(--vh));
   }
   .hero__photo {
     left: 0;

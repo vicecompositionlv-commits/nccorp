@@ -7,6 +7,10 @@
   /* Layout tokens from the Figma frames: phone 390 (default), tablet 768, desktop 1440. */
   --header-h: 96px;
   --pad-x: 20px;
+  /* Laptop range (1024-1439px): the 1440px desktop layout is zoomed down to fit. --z is the zoom factor,
+     --vh is a viewport height that stays correct inside the zoomed canvas (vh units get zoomed too). */
+  --z: 1;
+  --vh: 100vh;
 }
 @media (min-width: 768px) {
   :root {
@@ -28,14 +32,22 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 h1, h2, p { margin: 0; }
 section { scroll-margin-top: var(--header-h); }
 .canvas { position: relative; overflow-x: hidden; }
-/* Content column. Phone: fluid with 20px gutters. Tablet: the 768px frame centred.
-   Desktop: the 1440px frame that absolutely-positioned children use as their coordinate system. */
+/* Content column. Phone: fluid with 20px gutters. Tablet (768-1023): the 768px frame centred.
+   Desktop (1024+, zoomed below 1440): the 1440px frame that absolutely-positioned children use as their coordinate system. */
 .inner { position: relative; width: 100%; margin: 0 auto; padding: 0 var(--pad-x); }
 @media (min-width: 768px) {
   .inner { width: 768px; }
 }
-@media (min-width: 1440px) {
+@media (min-width: 1024px) {
   .inner { width: 1440px; height: 100%; padding: 0; }
+}
+/* Laptops: zoom the whole canvas so the 1440px frame fits the viewport exactly. */
+@media (min-width: 1024px) and (max-width: 1439.98px) {
+  :root {
+    --z: calc(100vw / 1440px);
+    --vh: calc(100vh / var(--z));
+  }
+  .canvas { zoom: var(--z); }
 }
 .label {
   display: inline-flex; align-items: center; gap: 12px;

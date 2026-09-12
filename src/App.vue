@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, provide, watchEffect, onMounted } from 'vue'
+import { ref, computed, provide, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import { messages, LANGS, loadLang, saveLang } from './i18n.js'
 import AppHeader from './components/AppHeader.vue'
 import HeroSection from './components/HeroSection.vue'
@@ -33,7 +33,17 @@ function setLang(code) {
 
 // The first client render must match the prerendered HTML, so a stored preference
 // is applied only after mount, and only when the URL did not ask for a language.
+// Laptop range: zoom the 1440px desktop layout to the real viewport width (clientWidth excludes the scrollbar,
+// so this is more exact than the CSS 100vw fallback).
+function applyZoom() {
+  const w = document.documentElement.clientWidth
+  const z = w >= 1024 && w < 1440 ? w / 1440 : 1
+  document.documentElement.style.setProperty('--z', String(z))
+}
+
 onMounted(() => {
+  applyZoom()
+  window.addEventListener('resize', applyZoom)
   const explicit = new URLSearchParams(window.location.search).has('lang') || EN_PATH.test(window.location.pathname)
   const stored = loadLang()
   if (!explicit && stored !== lang.value) setLang(stored)
@@ -46,6 +56,8 @@ watchEffect(() => {
   const description = document.querySelector('meta[name="description"]')
   if (description) description.setAttribute('content', t.value.meta.description)
 })
+
+onBeforeUnmount(() => window.removeEventListener('resize', applyZoom))
 
 provide('t', t)
 provide('lang', lang)

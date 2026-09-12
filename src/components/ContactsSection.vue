@@ -109,12 +109,12 @@ const telHref = computed(() => 'tel:+' + t.value.contacts.phone.replace(/\D/g, '
   }
 }
 
-/* ---------- desktop (Figma 1440x705): exact coordinates ---------- */
-@media (min-width: 1440px) {
+/* ---------- desktop (Figma 1440x705, scaled down between 1024 and 1439px): exact coordinates ---------- */
+@media (min-width: 1024px) {
   /* Header (195px) + this section fill the viewport; never shorter than the 705px mockup frame. */
   .contacts {
     min-height: 0;
-    height: max(705px, calc(100vh - 195px));
+    height: max(705px, calc(var(--vh) - 195px));
     padding: 0;
   }
   /* Mockup crop: photo 2475px wide shifted 185px left, 13px up. Wider screens scale it to fill. */

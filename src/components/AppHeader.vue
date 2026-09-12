@@ -125,8 +125,8 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
   }
 }
 
-/* ---------- desktop (Figma 1440): full menu ---------- */
-@media (min-width: 1440px) {
+/* ---------- desktop (Figma 1440, scaled down between 1024 and 1439px): full menu ---------- */
+@media (min-width: 1024px) {
   .logo {
     left: 64px;
   }
